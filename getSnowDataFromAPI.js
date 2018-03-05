@@ -8,4 +8,5 @@ req.open("GET",API_END_POINT+'winter/snowdepth/48.41108,-114.33763?client_id='+ 
 req.send(null);
 
 var obj = JSON.parse(req.response);
+console.log(req.response);
 console.log(obj.response.periods[0].snowDepthIN)

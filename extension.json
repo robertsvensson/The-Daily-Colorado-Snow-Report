@@ -1,0 +1,6 @@
+{
+  "id": "snowdepth",
+  "name": "Snowdepth CO",
+  "srcdoc": "./index.html",
+  "fieldTypes": ["Integer", "Number"]
+}
