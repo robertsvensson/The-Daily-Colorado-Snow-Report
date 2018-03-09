@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    var ACCESS_ID ='9xKgBsSEnApnNhGYgrpFp';
+    var SECRET_KEY='z9VMTOpFSyWe7hNRn1w3xVHpxUGZO0WPWq9kirKj';
+    var API_END_POINT='https://api.aerisapi.com/';
+
+
+    fetch(API_END_POINT+'winter/snowdepth/48.41108,-114.33763?client_id='+ ACCESS_ID +'&client_secret='+SECRET_KEY)
+      .then(
+        function(response) {
+          response.json().then(function(data) {
+            console.log(data.response.periods[0].snowDepthIN);
+          });
+        }
+      )
+
+
+    </script>
+
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
-    <title>Rating Dropdown Widget</title>
+    <title>Sunlight mountain snowdepth</title>
     <!--
     Include styles from the Contentful app.
     See http://contentful.github.io/ui-extensions-sdk/styleguide for information on
@@ -25,57 +25,72 @@
   </head>
   <body>
     <p>
-      <button class="cf-btn-primary" onclick="myFunction()" id="getSnowDepth">Get snow depth</button>
+      <button class="cf-btn-primary" onclick="getSnowDepth()" id="getSnowDepth">Get snow depth for Sunlight Mountain</button>
     </p>
     <p>
       <div class="cf-form-field">
-        <label>Name</label>
-        <input type="text" value="Contentful!" class="cf-form-input" id="COsnowDepth">
-        <div class="cf-form-hint">
-          You have to provide your name here or there
-        </div>
+        <input type="text" class="cf-form-input" id="sunlightMountainSnowDepth">
       </div>
     </p>
 
     <script>
-    function myFunction() {
-      console.log('I clicked the button');
+
+    // This is the main entry point for extensions.
+    //
+    // The extension API reference explains in detail what you can do with
+    // the 'api' object.
+    //var cfExt = window.contentfulExtension || window.contentfulWidget
+    //cfExt.init(function (api) {
+      // Whenever the size of this document changes we adjust the size of
+      // the IFrame in the Contentful App.
+      // Remember the setvalue
+
+
+  //  })
+
+    function getSnowDepth() {
+
       var ACCESS_ID ='9xKgBsSEnApnNhGYgrpFp';
       var SECRET_KEY='z9VMTOpFSyWe7hNRn1w3xVHpxUGZO0WPWq9kirKj';
       var API_END_POINT='https://api.aerisapi.com/';
 
-      var req = new XMLHttpRequest();
 
-      req.open("GET",API_END_POINT+'winter/snowdepth/48.41108,-114.33763?client_id='+ ACCESS_ID +'&client_secret='+SECRET_KEY,false);
-      req.send(null);
+      fetch(API_END_POINT+'winter/snowdepth/48.41108,-114.33763?client_id='+ ACCESS_ID +'&client_secret='+SECRET_KEY)
+        .then(
+          function(response) {
+            response.json().then(function(data) {
 
-      var obj = JSON.parse(req.response);
-      console.log(req.response);
-      console.log(obj.response.periods[0].snowDepthIN)
-      document.getElementById("COsnowDepth").value = obj.response.periods[0].snowDepthIN;
+              setSnowDepth(data.response.periods[0].snowDepthIN)
+
+            });
+          }
+        )
+
+
+
     }
+
+
+function setSnowDepth(data){
+  console.log(data);
+  // initialize the contentful extension
+  // using the UI extensions SDK
+  window.contentfulExtension.init( extension => {
+    const select = document.getElementById('sunlightMountainSnowDepth');
+  //  const value = extension.field.getValue();
+    //select.value = value;
+
+    //extension.field.setValue( event.target.value );
+    extension.field.setValue( '5' );
+
+  } );
+}
+
+
+
     </script>
 
 
 
-    <script>
-
-      // This is the main entry point for extensions.
-      //
-      // The extension API reference explains in detail what you can do with
-      // the 'api' object.
-      var cfExt = window.contentfulExtension || window.contentfulWidget
-      cfExt.init(function (api) {
-        // Whenever the size of this document changes we adjust the size of
-        // the IFrame in the Contentful App.
-        api.window.startAutoResizer()
-        console.log('Inside the thing');
-        alert('sfsd');
-        console.log('is this updated eyt');
-
-
-
-      })
-    </script>
   </body>
 </html>
